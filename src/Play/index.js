@@ -1,40 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './index.css'
+
 import {
   Container,
   Grid,
-  TextField,
-  Button,
   Typography
 } from '@material-ui/core';
-import {
-  youtubeUrlParser,
-} from '../helpers/parsers'
+import { getEmbedYTUrl } from '../helpers/urls'
 
-import {
-  getEmbedYTUrlById
-} from '../helpers/urls'
+import SearchBox from './components/SearchBox'
+import Video from './components/VideoFrame'
 
 export default () => {
   const [enteredUrl, setEnteredUrl] = useState('')
   const [parsedUrl, setParsedUrl] = useState('')
-  const playerRef = useRef()
-  const onTextFieldChange = (event) => {
+
+  const onUrlChange = (event) => {
     const newValue = event.target.value
     setEnteredUrl(newValue)
   }
-  const search = async () => {
+  const onParse = async () => {
     if (!enteredUrl) return alert('Please enter an URL')
-    const id = youtubeUrlParser(enteredUrl)
-    if (!id) return alert('Enter a valid YouTube URL')
-    const newUrl = getEmbedYTUrlById(id)
-    debugger
+    const newUrl = getEmbedYTUrl(enteredUrl)
+    if (!newUrl) return
     setParsedUrl(newUrl)
   }
+
   return (
-    <Container
-      className="play-container"
-    >
+    <Container className="play-container">
       <Grid
         container
         direction="column"
@@ -45,32 +38,13 @@ export default () => {
         <Grid container item justify="center">
           <Typography variant="h4">
             Enter the YouTube video URL
-        </Typography>
+          </Typography>
         </Grid>
         <Grid container item justify="center">
-          <TextField
-            value={enteredUrl}
-            id="search-field"
-            label="Enter the url..."
-            variant="outlined"
-            onChange={onTextFieldChange}
-          />
-          <Button
-            id="search-btn"
-            variant="contained"
-            color="primary"
-            onClick={search}
-          >
-            Search
-          </Button>
+          <SearchBox onUrlChange={onUrlChange} value={enteredUrl} onParse={onParse} />
         </Grid>
         <Grid container item justify="center" >
-          <iframe id="yt-iframe" src={parsedUrl}
-            frameBorder='0'
-            allow='autoplay; encrypted-media'
-            allowFullScreen
-            title='video'
-          />
+          <Video url={parsedUrl} />
         </Grid>
       </Grid>
     </Container >
