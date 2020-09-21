@@ -9,12 +9,12 @@ import {
 import { Link } from 'react-router-dom';
 export default () => {
   return (
-    <AppBar position="static" className="app-bar">
+    <AppBar position="relative" className="app-bar">
       <Toolbar>
         <Grid
           container
           direction="row"
-          justify="start"
+          justify="flex-start"
           alignItems="center"
           spacing={5}
           className="header-grid"

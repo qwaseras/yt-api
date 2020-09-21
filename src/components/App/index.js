@@ -1,14 +1,14 @@
 import React from 'react';
 import './index.css'
 
-import Routes from '../../Routes'
+import Routes from '../Routes'
 import { BrowserRouter } from 'react-router-dom';
 import Header from '../Header'
 
-export default () =>  {
+export default () => {
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
       <Routes />
     </BrowserRouter>
   );
