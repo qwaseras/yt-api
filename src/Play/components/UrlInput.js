@@ -7,13 +7,13 @@ import {
 export default ({url, onUrlChange, onParse}) => <>
   <TextField
     value={url}
-    id="search-field"
+    className="query-text-field"
     label="Enter the url..."
     variant="outlined"
     onChange={onUrlChange}
   />
   <Button
-    id="search-btn"
+    className="action-btn"
     variant="contained"
     color="primary"
     onClick={onParse}

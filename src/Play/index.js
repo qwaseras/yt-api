@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './index.css'
 
 import {
   Container,
@@ -8,8 +7,8 @@ import {
 } from '@material-ui/core';
 import { getEmbedYTUrl } from '../helpers/urls'
 
-import SearchBox from './components/SearchBox'
-import Video from './components/VideoFrame'
+import UrlInput from './components/UrlInput'
+import Video from '../VideoFrame'
 
 export default () => {
   const [enteredUrl, setEnteredUrl] = useState('')
@@ -27,7 +26,7 @@ export default () => {
   }
 
   return (
-    <Container className="play-container">
+    <Container className="container">
       <Grid
         container
         direction="column"
@@ -41,7 +40,7 @@ export default () => {
           </Typography>
         </Grid>
         <Grid container item justify="center">
-          <SearchBox onUrlChange={onUrlChange} value={enteredUrl} onParse={onParse} />
+          <UrlInput onUrlChange={onUrlChange} value={enteredUrl} onParse={onParse} />
         </Grid>
         <Grid container item justify="center" >
           <Video url={parsedUrl} />
