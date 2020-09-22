@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ResultCard from './ResultCard'
-export default ({ data, changePage }) => {
+export default ({ data, changePage, openModal }) => {
   if (!data) return <></>
   const {
     items,
@@ -13,7 +13,13 @@ export default ({ data, changePage }) => {
   return <>
     <span> Total Results: {pageInfo.totalResults}</span>
     {
-      items.map((item, i) => <ResultCard data={item.snippet} key={i} />)
+      items.map((item, i) => (
+        <ResultCard
+          onClick={() => openModal(item.id.videoId)}
+          data={item.snippet}
+          key={i}
+        />
+      ))
     }
     <div className="simple-pagination">
       {prevPageToken ? <span onClick={() => changePage(prevPageToken)}>{'< Previous page'}</span> : <span />}

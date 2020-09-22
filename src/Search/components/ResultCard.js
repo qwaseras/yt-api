@@ -6,9 +6,9 @@ import {
   Grid
 } from '@material-ui/core';
 
-export default ({ data }) => {
+export default ({ data, onClick }) => {
   if (!data) return <></>
-  return <div className="result-card">
+  return <div className="result-card" onClick={onClick}>
     < Grid
     direction="row"
     justify="space-between"

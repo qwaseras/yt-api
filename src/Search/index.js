@@ -1,48 +1,43 @@
 import React, { useState } from 'react';
-import axios from 'axios'
 import {
   Container,
   Grid,
-  Typography
+  Typography,
 } from '@material-ui/core';
+
+import { getEmbedYTUrl } from '../helpers/urls'
+import {loadResultsPage, loadSearchResults} from "../helpers/requests"
 
 import QueryInput from './components/QueryInput'
 import SearchResults from './components/SearchResults'
-import { YT_SEARCH_API_URL, GOOGLE_API_KEY } from '../helpers/config'
-import sampleData from '../helpers/sample-data.json'
+import VideoModal from './components/VideoModal'
 
 export default () => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchResult, setSearchResult] = useState(sampleData)
+  const [searchResult, setSearchResult] = useState()
+  const [modalOpen, setModalOpen] = useState(false)
+  const [embedUrl, setEmbedUrl] = useState('')
 
   const onQueryChange = (event) => {
     const { value } = event.target
     setSearchQuery(value)
   }
   const search = async () => {
-    if(!searchQuery) return
-    const response = await axios.get(YT_SEARCH_API_URL, {
-      params: {
-        q: searchQuery,
-        key: GOOGLE_API_KEY,
-        part: 'snippet',
-        type: 'video'
-      }
-    })
+    if (!searchQuery) return
+    const response = await loadSearchResults(searchQuery)
+    if(!response) return
     setSearchResult(response.data)
   }
   const changePage = async (pageToken) => {
-    if(!searchQuery) return
-    const response = await axios.get(YT_SEARCH_API_URL, {
-      params: {
-        q: searchQuery,
-        key: GOOGLE_API_KEY,
-        part: 'snippet',
-        type: 'video',
-        pageToken: pageToken
-      }
-    })
+    if (!searchQuery) return
+    const response = await loadResultsPage(searchQuery, pageToken)
+    if(!response) return
     setSearchResult(response.data)
+  }
+  const openModal = (id) => {
+    const newEmbedUrl = getEmbedYTUrl(id)
+    setEmbedUrl(newEmbedUrl)
+    setModalOpen(true)
   }
   return (
     <Container className="container">
@@ -82,9 +77,15 @@ export default () => {
           <SearchResults
             data={searchResult}
             changePage={changePage}
+            openModal={openModal}
           />
         </Grid>
       </Grid>
+      <VideoModal
+        open={modalOpen}
+        close={() => setModalOpen(false)}
+        url={embedUrl}
+      />
     </Container>
   );
 }

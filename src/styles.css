@@ -13,7 +13,8 @@ code {
 }
 
 .container {
-  margin-top: 5em;
+  margin: 5em 0 2em 0;
+  min-height: 46.5em;
 }
 
 .query-text-field {
@@ -31,13 +32,17 @@ code {
 
 #iframe-placeholder {
   width: 60em;
-  height: 35em;
+  height: 34.2em;
   background-color: #efefef;
   color: #c0c0c0;
 }
 
 .app-bar {
   background: linear-gradient(0deg, rgba(47, 45, 89, 1) 0%, rgba(255, 0, 99, 1) 100%);
+}
+
+.footer {
+  background: linear-gradient(0deg, rgba(255, 0, 99, 1) 0%, rgba(47, 45, 89, 1) 100%);
 }
 
 .header-grid {
@@ -57,26 +62,39 @@ code {
   object-fit: contain;
   margin-right: 1em;
 }
-.result-card{
+
+.result-card {
   height: 12em;
   border-bottom: 1px solid #d0d0d0;
   margin: 1em 0;
   cursor: pointer;
 }
 
-.result-card :hover{
+.result-card :hover {
   background-color: #EEF;
 }
 
-.simple-pagination{
+.simple-pagination {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.simple-pagination span{
+.simple-pagination span {
   cursor: pointer;
 }
-.simple-pagination span:hover{
+
+.simple-pagination span:hover {
   color: #00E
+}
+
+.search-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cr-link{
+  text-decoration: none;
+  color: #0EF;
+  margin: 0 5px;
 }
