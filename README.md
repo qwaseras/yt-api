@@ -4,9 +4,7 @@ https://talenya-test.herokuapp.com/
 
 # Launch locally: 
 
-Provide API_KEY in process.env
-
-Then use npm start
+Use npm start (you should provide process.env.API_KEY )
 
 # Dependencies
 
