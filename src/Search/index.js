@@ -5,7 +5,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { getEmbedYTUrl } from '../helpers/urls'
+import { getEmbedVideoUrl } from '../helpers/urls'
 import {loadResultsPage, loadSearchResults} from "../helpers/requests"
 
 import QueryInput from './components/QueryInput'
@@ -35,7 +35,8 @@ export default () => {
     setSearchResult(response.data)
   }
   const openModal = (id) => {
-    const newEmbedUrl = getEmbedYTUrl(id)
+    if(!id) return
+    const newEmbedUrl = getEmbedVideoUrl(id)
     setEmbedUrl(newEmbedUrl)
     setModalOpen(true)
   }

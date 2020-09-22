@@ -9,6 +9,9 @@ export default ({ open, close, url }) => {
     onClose={close}
     className="search-modal"
   >
-    <Video url={url} />
+
+    <div> {/*  to avoid material ui console errors */}
+      <Video url={url} />
+    </div>
   </Modal>
 }

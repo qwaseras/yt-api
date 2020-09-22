@@ -5,7 +5,7 @@ import {
   Grid,
   Typography
 } from '@material-ui/core';
-import { getEmbedYTUrl } from '../helpers/urls'
+import { getEmbedVideoUrl } from '../helpers/urls'
 import { youtubeUrlParser } from '../helpers/parsers'
 
 import UrlInput from './components/UrlInput'
@@ -23,7 +23,7 @@ export default () => {
     if (!enteredUrl) return alert('Please enter an URL')
     const id = youtubeUrlParser(enteredUrl)
     if (!id) return alert('Enter a valid YouTube URL')
-    const newUrl = getEmbedYTUrl(id)
+    const newUrl = getEmbedVideoUrl(id)
     if (!newUrl) return
     setParsedUrl(newUrl)
   }
